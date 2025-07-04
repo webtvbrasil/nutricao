@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutricionista Esportivo UFC - Seu PC Turbinado!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;700;900&family=Roboto:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Estilos Gerais */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        section {
+            padding: 40px 0;
+        }
+
+        /* Container Principal */
+        .main-container {
+            border: 5px solid white;
+            border-radius: 5px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            /* Efeito Vidro */
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        /* Títulos e Subtítulos */
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 3rem;
+            color: #4CAF50;
+            /* Verde Vibrante */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        /* Vídeo */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* Proporção 16:9 */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Aviso de Pessoas Assistindo */
+        .viewers-alert {
+            background-color: rgba(76, 175, 80, 0.8);
+            /* Verde Transparente */
+            color: white;
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        /* Contador Regressivo (Estilo Vidro) */
+        .countdown-container {
+            background: rgba(255, 255, 255, 0.1);
+            /* Vidro */
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            /* Sombra Suave */
+        }
+
+        /* Botão de Checkout (Estilizado) */
+        .checkout-button {
+            background: linear-gradient(45deg, #2E7D32, #4CAF50);
+            /* Degradê Verde */
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            /* Arredondado */
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            /* Sombra Profunda */
+            transition: transform 0.3s ease;
+            /* Efeito Hover */
+            margin-top: 20px;
+        }
+
+        .checkout-button:hover {
+            transform: scale(1.05);
+            /* Leve Aumento */
+        }
+
+        /* Descrição do Produto */
+        .product-description {
+            margin-top: 30px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #eee;
+        }
+
+        /* Ícones de Benefícios */
+        .benefits-icons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .benefit-item {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .benefit-item i {
+            font-size: 2.5rem;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        /* Depoimentos (Carrossel) */
+        .testimonial-carousel {
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-item {
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            /* Transparente */
+            backdrop-filter: blur(5px);
+            text-align: center;
+            font-style: italic;
+            color: #ddd;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            /* Efeito Fade */
+        }
+
+        .testimonial-item.active {
+            opacity: 1;
+            position: relative;
+            /* Torna visível */
+        }
+
+        /* Notificação de Vendas (Topo Direito) */
+        .sale-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #f44336;
+            /* Vermelho */
+            color: white;
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            z-index: 1000;
+            /* Acima de Tudo */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Botão Final de Compra */
+        .final-checkout-button {
+            background: linear-gradient(45deg, #2E7D32, #4CAF50);
+            color: white;
+            font-size: 1.6rem;
+            font-weight: 900;
+            padding: 18px 35px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.7);
+            transition: transform 0.3s ease;
+            margin-top: 40px;
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .final-checkout-button:hover {
+            transform: scale(1.07);
+        }
+
+        /* Ajustes Responsivos */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .product-description {
+                font-size: 1rem;
+            }
+
+            .benefits-icons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .benefit-item {
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Notificação de Venda Fake -->
+    <div class="sale-notification">
+        🔥 João de São Paulo acaba de adquirir!
+    </div>
+
+    <section>
+        <div class="container main-container">
+
+            <!-- Título e Subtítulo -->
+            <h1 class="text-center">Transforme Seu PC em um Nutricionista Esportivo Nível UFC!</h1>
+            <h2 class="text-center">Software Revolucionário para Dietas Personalizadas de Alta Performance</h2>
+
+            <!-- Vídeo de Apresentação -->
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                    title="Vídeo de Demonstração do Software Nutricionista UFC" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+
+            <!-- Aviso de Pessoas Assistindo -->
+            <div class="viewers-alert">
+                <i class="fas fa-eye"></i> <strong>47 pessoas</strong> estão assistindo agora!
+            </div>
+
+            <!-- Contador Regressivo -->
+            <div class="countdown-container">
+                Oferta Especial Termina em: <span id="countdown">05:23:18</span>
+            </div>
+
+            <!-- Botão de Checkout Principal -->
+            <div class="text-center">
+                <button class="checkout-button">
+                    🔥 Quero Meu PC Nutricionista UFC Agora!
+                </button>
+            </div>
+
+            <!-- Descrição do Produto -->
+            <div class="product-description">
+                <p>
+                    Cansado de dietas genéricas que não te levam a lugar nenhum? Apresentamos o software que vai revolucionar
+                    sua preparação física!
+                </p>
+                <p>
+                    Nosso sistema avançado usa inteligência artificial para analisar seus dados, entender suas
+                    necessidades e criar um plano alimentar 100% personalizado.
+                </p>
+                <p>
+                    Deixe seu computador se tornar seu nutricionista particular e alcance o nível UFC de performance!
+                </p>
+            </div>
+
+            <!-- Ícones de Benefícios -->
+            <div class="benefits-icons">
+                <div class="benefit-item">
+                    <i class="fas fa-chart-line"></i>
+                    <p>Otimização Metabólica</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-dumbbell"></i>
+                    <p>Ganho de Massa Muscular</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-fire"></i>
+                    <p>Queima de Gordura Acelerada</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-heart"></i>
+                    <p>Saúde Cardiovascular</p>
+                </div>
+            </div>
+
+            <!-- Depoimentos (Carrossel) -->
+            <div class="testimonial-carousel">
+                <div class="testimonial-item active">
+                    "Incrível! Meus resultados nunca foram tão rápidos. O software é super fácil de usar e o plano
+                    alimentar é delicioso!" - <strong>José, Lutador Amador</strong>
+                </div>
+                <div class="testimonial-item">
+                    "Eu estava cético, mas o software realmente funciona! Minha energia aumentou e meu desempenho melhorou
+                    muito." - <strong>Maria, CrossFit</strong>
+                </div>
+                <!-- Adicione mais depoimentos aqui -->
+            </div>
+
+            <!-- Botão Final de Compra -->
+            <a href="#" class="final-checkout-button">
+                🚀 Leve Seu Treino ao Próximo Nível!
+            </a>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Contador Regressivo
+        function countdown() {
+            const target = new Date();
+            target.setMinutes(target.getMinutes() + 30);
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const timeLeft = target.getTime() - now;
+
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                document.getElementById('countdown').innerText =
+                    hours.toString().padStart(2, '0') + ':' +
+                    minutes.toString().padStart(2, '0') + ':' +
+                    seconds.toString().padStart(2, '0');
+            }
+
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+
+        countdown();
+
+        // Carrossel de Depoimentos (Loop Infinito)
+        $(document).ready(function () {
+            var testimonials = $('.testimonial-item');
+            var testimonialIndex = 0;
+
+            function showNextTestimonial() {
+                $(testimonials[testimonialIndex]).removeClass('active');
+                testimonialIndex = (testimonialIndex + 1) % testimonials.length;
+                $(testimonials[testimonialIndex]).addClass('active');
+            }
+
+            setInterval(showNextTestimonial, 5000); // Troca a cada 5 segundos
+        });
+    </script>
+</body>
+
+</html>
